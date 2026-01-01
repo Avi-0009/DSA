@@ -1,18 +1,21 @@
 class Solution {
 public:
     bool isPalindrome(string s) {
-        string lower = "";
-
+        string t = "";
         for(char c : s){
-            if(!isalnum(c))
+            if(!isalnum(c)){
                 continue;
-            if(c >= 'A' and c <= 'Z')
+            }
+            if(c >= 65 and c <= 90){
                 c += 32;
-            lower += c;
+            }
+            t += c;
         }
 
-        for(int left = 0, right = lower.size() - 1; left < lower.size() / 2; left++, right--){
-            if(lower[left] != lower[right])
+        int n = t.size();
+
+        for(int i = 0, j = n - 1; i < n / 2; i++, j--){
+            if(t[i] != t[j])
                 return false;
         }
         return true;
