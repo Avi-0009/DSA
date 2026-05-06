@@ -16,7 +16,6 @@ public:
 
         int res = 0;
         for(int i = 0; i < n; i++){
-            //min 
             res += min(left[i], right[i])- height[i];
         }
         return res;
