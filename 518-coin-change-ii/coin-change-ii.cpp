@@ -1,17 +1,32 @@
 class Solution {
 public:
-    int solve(int n, int amount, vector<int>&coins, vector<vector<int>>&dp){
-        if(n == 0)return 0;
-        if(amount == 0) return 1;
+    int solve(int idx, int amount, vector<int>& coins, vector<vector<int>>& dp) {
 
-        if(dp[n][amount] != -1)return dp[n][amount];
-        if(coins[n - 1] > amount)
-            return dp[n][amount] = solve(n - 1, amount, coins, dp);
-        else
-            return dp[n][amount] = solve(n, amount - coins[n - 1], coins, dp) + solve(n - 1, amount, coins, dp);
+        if(amount == 0)
+            return 1;
+
+        if(idx == 0)
+            return 0;
+
+        if(dp[idx][amount] != -1)
+            return dp[idx][amount];
+
+        int notTake = solve(idx - 1, amount, coins, dp);
+
+        int take = 0;
+
+        if(coins[idx - 1] <= amount)
+            take = solve(idx, amount - coins[idx - 1], coins, dp);
+
+        return dp[idx][amount] = take + notTake;
     }
+
     int change(int amount, vector<int>& coins) {
-        vector<vector<int>>dp(coins.size() + 1, vector<int>(amount + 1, -1));
-        return solve(coins.size(), amount, coins, dp);
+
+        int n = coins.size();
+
+        vector<vector<int>> dp(n + 1, vector<int>(amount + 1, -1));
+
+        return solve(n, amount, coins, dp);
     }
 };
