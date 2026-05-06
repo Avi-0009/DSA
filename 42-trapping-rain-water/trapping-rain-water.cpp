@@ -2,13 +2,15 @@ class Solution {
 public:
     int trap(vector<int>& height) {
         int n = height.size();
-        vector<int>left(n, 0), right(n, 0);
+        vector<int>left(n, 0);
         left.front() = height.front();
-        right.back() = height.back();
 
         for(int i = 1; i < n; i++){
             left[i] = max(height[i], left[i - 1]);
         }
+
+        vector<int>right(n, 0);
+        right.back() = height.back();
 
         for(int i = n - 2; i >= 0; i--){
             right[i] = max(height[i], right[i + 1]);
