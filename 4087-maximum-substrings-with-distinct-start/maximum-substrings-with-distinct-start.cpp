@@ -1,13 +1,15 @@
 class Solution {
 public:
     int maxDistinct(string s) {
-        int n = s.size();
-        if(n < 2)return n;
-        unordered_set<char>uset;
-        for(int i = 0; i < n; i ++){
-            if(uset.find(s[i]) == uset.end())
-                uset.insert(s[i]);
+        vector<int>uset(26,0);
+        for(char &c : s){
+            uset[c - 'a']++;
         }
-        return uset.size();
+        int count = 0;
+        for(int i : uset){
+            if(i > 0)
+                count++;
+        }
+        return count;
     }
 };
