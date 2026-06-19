@@ -2,7 +2,7 @@ class Solution {
 public:
     vector<int> pivotArray(vector<int>& nums, int pivot) {
         int n = nums.size();
-        vector<int>res(n, 0);
+        vector<int>res(n, pivot);
         int i = 0, j = n - 1;
         int left = 0, right = n - 1;
         while(i < n){
@@ -18,12 +18,6 @@ public:
 
             i++;
             j--;
-        }
-        for(i = 0; i < n; i++){
-            if(nums[i] == pivot){
-                res[left] = nums[i];
-                left++;
-            }
         }
         return res;
     }
