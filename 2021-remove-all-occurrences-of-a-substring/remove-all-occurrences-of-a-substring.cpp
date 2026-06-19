@@ -1,21 +1,18 @@
 class Solution {
 public:
     string removeOccurrences(string s, string part) {
-        // if(part.size() > s.size()) return s;
-        // int n = s.size(), left = 0;
-        // while(left != n){
-        //     if(s.size() >= part.size()){
-        //         string chunk = s.substr(part.size());
-        //         if(chunk == part){
-        //             s.erase(left + part.size() - 1, part.size());
-        //         }
-        //     }
-        //     left ++;
-        // }
-        // return s;
-        while(s.contains(part)){
-            s.erase(s.find(part), part.size());
+        if(part.size() > s.size()) return s;
+        string res;
+        int n = part.size();
+        for(char & ch : s){
+            res.push_back(ch);
+
+            if(ch == part.back() && res.size() >= n){
+                if(res.substr(res.size() - n) == part){
+                    res.erase(res.size() - n);
+                }
+            }
         }
-        return s;
+        return res;
     }
 };
