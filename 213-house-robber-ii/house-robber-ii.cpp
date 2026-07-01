@@ -1,16 +1,21 @@
 class Solution {
 public:
+    int solve(int start, int end, vector<int> & nums){
+        int prev1 = 0, prev2 = 0;
+        for(int i = start; i <= end; i++){
+            int take = nums[i] + prev2;
+            int notTake = prev1;
+
+            int curr = max(take, notTake);
+
+            prev2 = prev1;
+            prev1 = curr;
+        }
+        return prev1;
+    }
     int rob(vector<int>& nums) {
         int n = nums.size();
         if(n <= 3)return *max_element(nums.begin(), nums.end());
-        vector<int>left(n, 0), right(n, 0);
-        left[0] = nums[0]; left[1] = max(nums[0], nums[1]);
-        right[1] = nums[1]; right[2] = max(nums[1], nums[2]);
-        for(int i = 3; i < n; i++){
-            left[i - 1] = max(left[i - 2], nums[i - 1] + left[i - 3]);
-            right[i] = max(right[i - 1], nums[i] + right[i - 2]);
-        }
-
-        return max(left[n - 2], right[n - 1]);
+        return max(solve(0, n - 2, nums), solve(1, n - 1, nums));
     }
 };
