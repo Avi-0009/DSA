@@ -12,13 +12,17 @@
 class Solution {
 public:
     TreeNode* searchBST(TreeNode* root, int val) {
-        while(root){
-            if(root->val > val){
+        stack<TreeNode*>st;
+        while(root or !st.empty()){
+            while(root){
+                st.push(root);
                 root = root->left;
-            }else if(root->val < val){
-                root = root->right;
             }
-            else return root;
+            root = st.top();
+            st.pop();
+            if(root->val == val)
+                return root;
+            root = root->right;
         }
         return nullptr;
     }
