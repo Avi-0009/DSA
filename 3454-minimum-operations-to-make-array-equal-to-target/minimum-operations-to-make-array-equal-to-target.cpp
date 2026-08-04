@@ -4,27 +4,27 @@ public:
         int n = nums.size();
         vector<int> diff(n);
 
-        for(int i = 0;i < n;i ++){
-            diff[i] = nums[i] - target[i];
+        for(int i = 0; i < n; i++){
+            diff[i] = target[i] - nums[i];
         }
 
-        long long count = 0, incr = 0, decr = 0;
+        long long count = 0, inc = 0, dec = 0;
 
         for(int i = 0; i < n; i++){
             if(diff[i] > 0){
-                if(diff[i] > incr){
-                    count += diff[i] - incr;
+                if(diff[i] > inc){
+                    count += diff[i] - inc;
                 }
-                incr = diff[i];
-                decr = 0;
+                inc = diff[i];
+                dec = 0;
             } else if(diff[i] < 0){
-                if(diff[i] < decr){
-                    count += decr - diff[i];
+                if(diff[i] < dec){
+                    count += dec - diff[i];
                 }
-                decr = diff[i];
-                incr = 0;
+                dec = diff[i];
+                inc = 0;
             } else{
-                incr = decr = 0;
+                inc = dec = 0;
             }
         }
         return count;
