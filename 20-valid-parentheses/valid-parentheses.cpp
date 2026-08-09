@@ -1,18 +1,18 @@
 class Solution {
 public:
     bool isValid(string s) {
-        // if(s.size() & 1)return false;
-        stack<char> st;
+        stack<int>st;
 
-        for(char c : s){
-            if(c == '(')st.push(')');
-            else if(c == '[')st.push(']');
-            else if(c == '{')st.push('}');
-            else{
-                if(st.size() >= 1 and st.top() == c)
-                    st.pop();
-                else
-                    return false;
+        for(char &c : s){
+            if(c == '('){
+                st.push(')');
+            } else if(c == '['){
+                st.push(']');
+            } else if(c == '{'){
+                st.push('}');
+            } else {
+                if(st.empty() or st.top() != c) return false;
+                else st.pop();
             }
         }
         return st.size() ? false : true;
